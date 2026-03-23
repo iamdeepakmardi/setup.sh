@@ -48,3 +48,10 @@ if ! command -v tmux >/dev/null 2>&1; then
 else
   echo "tmux already installed."
 fi
+
+# Configure tmux to start window and pane indices from 1
+echo "Configuring tmux..."
+TOUCH_CONF="$HOME/.tmux.conf"
+[ ! -f "$TOUCH_CONF" ] && touch "$TOUCH_CONF"
+grep -q "set -g base-index 1" "$TOUCH_CONF" || echo "set -g base-index 1" >> "$TOUCH_CONF"
+grep -q "setw -g pane-base-index 1" "$TOUCH_CONF" || echo "setw -g pane-base-index 1" >> "$TOUCH_CONF"
